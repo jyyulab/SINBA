@@ -21,7 +21,7 @@ for CNS tumors.
 <center>
 
 <figure>
-<img src="/Users/jliu2/Documents/SINBA/docs/reference/figures/SINBA_1.0.png"
+<img src="[/Users/jliu2/Documents/SINBA/docs/reference/figures/SINBA_1.0.png](https://github.com/jyyulab/SINBA/blob/main/SINBA_1.0.png]"
 alt="SINBA(1.0)" />
 <figcaption aria-hidden="true">SINBA(1.0)</figcaption>
 </figure>
