@@ -20,11 +20,8 @@ for CNS tumors.
 
 <center>
 
-<figure>
-<img src="/Users/jliu2/Documents/SINBA/docs/reference/figures/SINBA_1.0.png"
-alt="SINBA(1.0)" />
-<figcaption aria-hidden="true">SINBA(1.0)</figcaption>
-</figure>
+![SINBA package ](https://github.com/jyyulab/SINBA_1.0/blob/master/SINBA_1.0.png)
+
 
 </center>
 
@@ -51,7 +48,7 @@ devtools::install_local(sprintf("%s/SINBA_0.0.1.0.tar.gz",pkg.dir),lib="your lib
 
 Instruction, documentation, and tutorials can be found at:
 
-- <https://jingl87.github.io/SINBA/>
+- <[https://jingl87.github.io/SINBA/](https://jingl87.github.io/SINBA/index.html)>
 
 ## Features
 
