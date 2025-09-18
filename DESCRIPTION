@@ -1,6 +1,6 @@
 Package: SINBA
 Title: Synergy inference by data-driven network-based Bayesian analysis
-Version: 1.0 
+Version: 1.1 
 Authors@R: 
     c(person(given = "Jingjing", family = "Liu", email = "jingjing.liu@stjude.org", role = c("aut", "cre"), comment = c(ORCID = "0000-0002-8184-8382")),
     person("Yu Lab @ St Jude Children's Research Hospital", role = "fnd"))
