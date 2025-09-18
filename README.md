@@ -40,8 +40,8 @@ devtools::install_github("jyyulab/SINBA",auth_token = "your auth_token", lib="yo
 2.  install from local file
 
 ``` r
-pkg.dir <- "/Volumes/project_space/yu3grp/software_JY/yu3grp/git_repo/SINBA" #"/research/projects/yu3grp/software_JY/yu3grp/git_repo/SINBA_1.O"
-devtools::install_local(sprintf("%s/SINBA_0.0.1.0.tar.gz",pkg.dir),lib="your lib path")
+pkg.dir <- "/Volumes/project_space/yu3grp/software_JY/yu3grp/git_repo/SINBA" #"/research_jude/rgs01_jude/groups/yu3grp/projects/software_JY/yu3grp/git_repo/SINBA"
+devtools::install_local(sprintf("%s/SINBA_1.1.tar.gz",pkg.dir),lib="your lib path")
 ```
 
 ## Documentation
