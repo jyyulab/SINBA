@@ -1,0 +1,87 @@
+title: SINBA
+url: https://jyyulab.github.io/SINBA/
+template:
+  bootstrap: 5
+  light-switch: yes
+  bslib:
+    pkgdown-nav-height: 100px
+news:
+  cran_dates: no
+navbar:
+  title: ~
+  type: default
+  left:
+  - text: News
+    href: news/index.html
+  - text: Tutorial
+    menu:
+    - text: SINBA Drug database
+      href: tutorials/sinba.html
+    - text: '-------'
+    - text: Example combination therapy in TALL
+      href: tutorials/TALL.html
+  - text: Articles
+    href: articles/paper.html
+  - text: Functions
+    href: reference/index.html
+  right:
+  - icon: fa-github
+    href: https://github.com/jyyulab/SINBA
+reference:
+- title: Project space
+  desc: Functions to create project working space, save and reload project.
+  contents:
+  - SINBA.analysis.dir.create
+  - SINBA.loadRData
+  - SINBA.saveRData
+- title: Network object
+  desc: Functions to clean network output from SJARACNe
+  contents:
+  - get.single.network
+  - get.combined.network
+  - combineNet2target_list
+- title: SINBA object
+  desc: Functions to create SINBA object.
+  contents:
+  - selectSP_driver_byDB
+  - cal.SINBA.Activity
+  - generate.SINBA.eset
+  - combine_names
+- title: DA analysis
+  desc: Functions to compare differential activity between groups and create summary
+    table.
+  contents:
+  - get.SINBA.DE.2G
+  - seed2partners_ftest
+  - l2l_ftest
+  - ROCTest
+  - generate.masterTable.SINBA
+  - generate.AUCTable
+- title: Combination screening layout
+  desc: Funtions to optimize Seed-Partner drivers layout
+  contents:
+  - find_max_sum_submatrix
+  - fitness_function
+  - convert_deltaZ2_matrix
+- title: Build-in Drugdatabases
+  desc: Funtions to load and filter drug-gene interactions from build-in databases.
+    Wrapper funtion to interact with DGIdb API.
+  contents:
+  - drugdb.preload
+  - drugdatabase_names
+  - sourceDatabases
+  - Drugbank_drugphase_levels
+  - Repurposing_HUB_drugphase_levels
+  - ChEMBL_drugphase_levels
+  - geneCategories
+  - interactionTypes
+  - queryDgidb_V5_drug
+  - queryDgidb_V5_gene
+  - queryDgidb_V5_drugAnnotation
+- title: Visulization
+  desc: Funtions to visulize SINBA results
+  contents:
+  - draw.box_SINBA
+  - draw.GSEA_SINBA
+  - draw.NetBID_SINBA
+  - draw.ROC_SINBA

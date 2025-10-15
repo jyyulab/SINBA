@@ -1,0 +1,8 @@
+pandoc: '3.2'
+pkgdown: 2.1.1
+pkgdown_sha: ~
+articles: {}
+last_built: 2025-09-18T15:18Z
+urls:
+  reference: https://jingl87.github.io/SINBA/reference
+  article: https://jingl87.github.io/SINBA/articles
