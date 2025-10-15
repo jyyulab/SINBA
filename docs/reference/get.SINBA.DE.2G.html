@@ -109,11 +109,11 @@
 <span class="r-in"><span><span class="va">G1</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">phe_info</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span><span class="va">phe_info</span><span class="op">$</span><span class="va">`subgroup`</span><span class="op">==</span><span class="st">"sensitive"</span><span class="op">)</span><span class="op">]</span> <span class="co"># get sample list for G1</span></span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in h(simpleError(msg, call)):</span> error in evaluating the argument 'x' in selecting a method for function 'rownames': object 'phe_info' not found</span>
 <span class="r-in"><span><span class="va">ac_eset</span><span class="op">&lt;-</span><span class="fu"><a href="generate.SINBA.eset.html">generate.SINBA.eset</a></span><span class="op">(</span>exp_mat<span class="op">=</span><span class="va">ac_mat</span>, phenotype_info<span class="op">=</span><span class="va">phe_info</span>, feature_info<span class="op">=</span><span class="cn">NULL</span>, annotation_info<span class="op">=</span><span class="st">""</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'ac_mat' not found</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in generate.SINBA.eset(exp_mat = ac_mat, phenotype_info = phe_info,     feature_info = NULL, annotation_info = ""):</span> could not find function "generate.SINBA.eset"</span>
 <span class="r-in"><span><span class="va">DE_gene_limma</span> <span class="op">&lt;-</span> <span class="fu">get.SINBA.DE.2G</span><span class="op">(</span>eset<span class="op">=</span><span class="va">SINBA.par</span><span class="op">$</span><span class="va">cal.eset</span>,G1<span class="op">=</span><span class="va">G1</span>,G0<span class="op">=</span><span class="va">G0</span>,G1_name<span class="op">=</span><span class="st">"sensitive"</span>,G0_name<span class="op">=</span><span class="st">'resistant'</span>,test.use<span class="op">=</span><span class="st">"limma"</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'SINBA.par' not found</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in get.SINBA.DE.2G(eset = SINBA.par$cal.eset, G1 = G1, G0 = G0,     G1_name = "sensitive", G0_name = "resistant", test.use = "limma"):</span> could not find function "get.SINBA.DE.2G"</span>
 <span class="r-in"><span><span class="va">DA_gene_limma</span> <span class="op">&lt;-</span> <span class="fu">get.SINBA.DE.2G</span><span class="op">(</span>eset<span class="op">=</span><span class="va">ac_eset</span>,G1<span class="op">=</span><span class="va">G1</span>,G0<span class="op">=</span><span class="va">G0</span>,G1_name<span class="op">=</span><span class="st">"sensitive"</span>,G0_name<span class="op">=</span><span class="st">'resistant'</span>,test.use<span class="op">=</span><span class="st">"limma"</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'ac_eset' not found</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in get.SINBA.DE.2G(eset = ac_eset, G1 = G1, G0 = G0, G1_name = "sensitive",     G0_name = "resistant", test.use = "limma"):</span> could not find function "get.SINBA.DE.2G"</span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
 <span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
 </code></pre></div>
@@ -127,7 +127,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer></div>

@@ -60,7 +60,7 @@
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">use_drugs</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Dasatinib"</span>,<span class="st">"DOVITINIB"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">res</span><span class="op">&lt;-</span><span class="fu">queryDgidb_V5_drug</span><span class="op">(</span>drugs<span class="op">=</span><span class="va">use_drugs</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in FUN(X[[i]], ...):</span> object 'Query' not found</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in queryDgidb_V5_drug(drugs = use_drugs):</span> could not find function "queryDgidb_V5_drug"</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
@@ -73,7 +73,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer></div>

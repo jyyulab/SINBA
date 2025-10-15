@@ -81,13 +81,13 @@
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">sinba_originalID</span><span class="op">&lt;-</span><span class="fu"><a href="combineNet2target_list.html">combineNet2target_list</a></span><span class="op">(</span>target_list<span class="op">=</span><span class="va">SINBA.par</span><span class="op">$</span><span class="va">combined.network</span><span class="op">$</span><span class="va">target_list</span>,seed_name<span class="op">=</span><span class="st">"LCK"</span>,partner_name<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"BCL2"</span>,<span class="st">"FYN"</span>,<span class="st">"STAT3"</span>,<span class="st">"PTCRA"</span><span class="op">)</span>,return_type<span class="op">=</span><span class="st">"SINBA_originalID"</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'SINBA.par' not found</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in combineNet2target_list(target_list = SINBA.par$combined.network$target_list,     seed_name = "LCK", partner_name = c("BCL2", "FYN", "STAT3",         "PTCRA"), return_type = "SINBA_originalID"):</span> could not find function "combineNet2target_list"</span>
 <span class="r-in"><span><span class="va">cal_mat</span><span class="op">&lt;-</span><span class="fu">Biobase</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/Biobase/man/exprs.html" class="external-link">exprs</a></span><span class="op">(</span><span class="va">SINBA.par</span><span class="op">$</span><span class="va">cal.eset</span><span class="op">)</span></span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in h(simpleError(msg, call)):</span> error in evaluating the argument 'object' in selecting a method for function 'exprs': object 'SINBA.par' not found</span>
 <span class="r-in"><span><span class="va">sinba_ac_mat</span><span class="op">&lt;-</span><span class="fu">cal.SINBA.Activity</span><span class="op">(</span>SINBA_originalID<span class="op">=</span><span class="va">sinba_originalID</span>,target_list<span class="op">=</span><span class="va">SINBA.par</span><span class="op">$</span><span class="va">combined.network</span><span class="op">$</span><span class="va">target_list</span>,cal_mat<span class="op">=</span><span class="va">cal_mat</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'cal_mat' not found</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in cal.SINBA.Activity(SINBA_originalID = sinba_originalID, target_list = SINBA.par$combined.network$target_list,     cal_mat = cal_mat):</span> could not find function "cal.SINBA.Activity"</span>
 <span class="r-in"><span><span class="va">single_ac_mat</span><span class="op">&lt;-</span><span class="fu">cal.SINBA.Activity</span><span class="op">(</span>target_list<span class="op">=</span><span class="va">SINBA.par</span><span class="op">$</span><span class="va">combined.network</span><span class="op">$</span><span class="va">target_list</span>,cal_mat<span class="op">=</span><span class="va">cal_mat</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'cal_mat' not found</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in cal.SINBA.Activity(target_list = SINBA.par$combined.network$target_list,     cal_mat = cal_mat):</span> could not find function "cal.SINBA.Activity"</span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
 <span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
 </code></pre></div>
@@ -101,7 +101,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer></div>
