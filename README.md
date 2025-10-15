@@ -48,7 +48,7 @@ devtools::install_local(sprintf("%s/SINBA_1.1.tar.gz",pkg.dir),lib="your lib pat
 
 Instruction, documentation, and tutorials can be found at:
 
-- [Weblink](https://jingl87.github.io/SINBA/index.html)
+- [Weblink](https://jyyulab.github.io/SINBA/)
 
 ## Features
 
