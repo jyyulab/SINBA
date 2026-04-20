@@ -2930,50 +2930,51 @@ queryDGIdb.SINBA <- function(genes=NULL,
 #' res<-queryDgidb_V5_gene (genes=use_genes)
 #'
 queryDgidb_V5_gene <- function(genes) {
-  dgidbV5_api<-"https://dgidb.org/api/graphql"
-  out_lst<-lapply(genes,function(gene){
-      ## Create a query class first
-    conn <- ghql::GraphqlClient$new(url = dgidbV5_api)
+  dgidbV5_api <- "https://dgidb.org/api/graphql"
+  conn <- ghql::GraphqlClient$new(url = dgidbV5_api)
+
+  out_lst <- lapply(genes, function(gene) {
     query_gene <- ghql::Query$new()
-    #"BRAF","MAP2K2"
     query_gene$query('x', sprintf('{
       genes(names: ["%s"]) {
         nodes {
           interactions {
-            drug {
-              name
-              conceptId
-            }
+            drug { name conceptId }
             interactionScore
-            interactionTypes {
-              type
-              directionality
-            }
-            interactionAttributes {
-              name
-              value
-            }
-            publications {
-              pmid
-            }
-            sources {
-              sourceDbName
-            }
+            interactionTypes { type directionality }
+            interactionAttributes { name value }
+            publications { pmid }
+            sources { sourceDbName }
           }
         }
       }
-    }',gene))
-    ## Execute the query
-    res <- conn$exec(query_gene$queries$x)
-    # Convert the the output from raw to json format
-    res <- jsonlite::fromJSON(res,flatten = TRUE,simplifyVector = TRUE)
-    if(is.null(dim(res$data$genes$nodes$interactions[[1]]))){
-      message(sprintf("Gene:%s not found in the database!",gene))}else{
-        res_up<-getResultSummary_gene_V5(gene=gene,output=res$data$genes$nodes$interactions)
-        return(res_up)}
-        })
-result<-do.call("rbind",out_lst[!is.null(out_lst)])
-return(result)
+    }', gsub('"', '\\\\"', gene)))
+
+    res <- tryCatch(
+      conn$exec(query_gene$queries$x),
+      error = function(e) {
+        message(sprintf("Query failed for %s: %s", gene, e$message))
+        NULL
+      }
+    )
+    if (is.null(res)) return(NULL)
+
+    res <- jsonlite::fromJSON(res, flatten = TRUE, simplifyVector = TRUE)
+    nodes <- res$data$genes$nodes
+
+    if (is.null(nodes) || length(nodes) == 0 ||
+        is.null(nodes$interactions) || length(nodes$interactions) == 0 ||
+        is.null(dim(nodes$interactions[[1]]))) {
+      message(sprintf("Gene:%s not found in the database!", gene))
+      return(NULL)
+    }
+
+    getResultSummary_gene_V5(gene = gene, output = nodes$interactions)
+  })
+
+  out_lst <- Filter(Negate(is.null), out_lst)
+  if (length(out_lst) == 0) return(NULL)
+  dplyr::bind_rows(out_lst)   # or data.table::rbindlist(out_lst, fill = TRUE)
 }
 #'
 #' @title queryDGIdb_by_drug
@@ -3019,52 +3020,51 @@ queryDGIdb_by_drug<-function(drugs=NULL, return_raw=F){
 #' res<-queryDgidb_V5_drug(drugs=use_drugs)
 #'
 queryDgidb_V5_drug <- function(drugs) {
-  dgidbV5_api<-"https://dgidb.org/api/graphql"
+  dgidbV5_api <- "https://dgidb.org/api/graphql"
+  conn <- ghql::GraphqlClient$new(url = dgidbV5_api)
 
-  out_lst<-lapply(drugs,function(drug){
-      ## Create a query class first
-    conn <- GraphqlClient$new(url = dgidbV5_api)
-    query_drug <- Query$new()
-    #"Dasatinib","DOVITINIB"
+  out_lst <- lapply(drugs, function(drug) {
+    query_drug <- ghql::Query$new()
     query_drug$query('x', sprintf('{
       drugs(names: ["%s"]) {
         nodes {
           interactions {
-            gene {
-              name
-              conceptId
-              longName
-            }
+            gene { name conceptId longName }
             interactionScore
-            interactionTypes {
-              type
-              directionality
-            }
-            interactionAttributes {
-              name
-              value
-            }
-            publications {
-              pmid
-            }
-            sources {
-              sourceDbName
-            }
+            interactionTypes { type directionality }
+            interactionAttributes { name value }
+            publications { pmid }
+            sources { sourceDbName }
           }
         }
       }
-    }',drug))
-    ## Execute the query
-    res <- conn$exec(query_drug$queries$x)
-    # Convert the the output from raw to json format
-    res <- jsonlite::fromJSON(res,flatten = TRUE,simplifyVector = TRUE)
-    if(is.null(dim(res$data$drugs$nodes$interactions[[1]]))){
-      message(sprintf("Drug:%s not found in the database!",drug))}else{
-         res_up<-getResultSummary_drug_V5(drug=drug,output=res$data$drugs$nodes$interactions)
-        return(res_up)}
-        })
-result<-do.call("rbind",out_lst[!is.null(out_lst)])
-return(result)
+    }', gsub('"', '\\\\"', drug)))
+
+    res <- tryCatch(
+      conn$exec(query_drug$queries$x),
+      error = function(e) {
+        message(sprintf("Query failed for %s: %s", drug, e$message))
+        NULL
+      }
+    )
+    if (is.null(res)) return(NULL)
+
+    res <- jsonlite::fromJSON(res, flatten = TRUE, simplifyVector = TRUE)
+    nodes <- res$data$drugs$nodes
+
+    if (is.null(nodes) || length(nodes) == 0 ||
+        is.null(nodes$interactions) || length(nodes$interactions) == 0 ||
+        is.null(dim(nodes$interactions[[1]]))) {
+      message(sprintf("Drug:%s not found in the database!", drug))
+      return(NULL)
+    }
+
+    getResultSummary_drug_V5(drug = drug, output = nodes$interactions)
+  })
+
+  out_lst <- Filter(Negate(is.null), out_lst)
+  if (length(out_lst) == 0) return(NULL)
+  dplyr::bind_rows(out_lst)   # or data.table::rbindlist(out_lst, fill = TRUE)
 }
 #' @title queryDgidb_V5_drugAnnotation
 #' @description Using ghql GraphqlClient function to query DGIdb version 5 to find the drug meta information, including: "name","conceptId","approved" ,"immunotherapy", "antiNeoplastic","drugAttributes" ,"drugApprovalRatings" ,"drugApplications".
@@ -3078,50 +3078,55 @@ return(result)
 #' res<-queryDgidb_V5_drugAnnotation(drugs=use_drugs)
 #'
 queryDgidb_V5_drugAnnotation <- function(drugs) {
-  dgidbV5_api<-"https://dgidb.org/api/graphql"
-   out_lst<-lapply(drugs,function(drug){
-      ## Create a query class first
-    conn <- GraphqlClient$new(url = dgidbV5_api)
-    query_drug <- Query$new()
-    #"Dasatinib","DOVITINIB"
+  dgidbV5_api <- "https://dgidb.org/api/graphql"
+  conn <- ghql::GraphqlClient$new(url = dgidbV5_api)
+
+  out_lst <- lapply(drugs, function(drug) {
+    query_drug <- ghql::Query$new()
     query_drug$query('x', sprintf('{
-    drugs(names: ["%s"]) {
-      nodes {
-        name
-        conceptId
-        approved
-        immunotherapy
-        antiNeoplastic
-        drugAttributes {
+      drugs(names: ["%s"]) {
+        nodes {
           name
-          value
-        }
-        drugApprovalRatings {
-          rating
-          source {
-            sourceDbName
-            sourceTrustLevel {
-              level
+          conceptId
+          approved
+          immunotherapy
+          antiNeoplastic
+          drugAttributes { name value }
+          drugApprovalRatings {
+            rating
+            source {
+              sourceDbName
+              sourceTrustLevel { level }
             }
           }
-        }
-        drugApplications {
-          appNo
+          drugApplications { appNo }
         }
       }
+    }', gsub('"', '\\\\"', drug)))
+
+    res <- tryCatch(
+      conn$exec(query_drug$queries$x),
+      error = function(e) {
+        message(sprintf("Query failed for %s: %s", drug, e$message))
+        NULL
+      }
+    )
+    if (is.null(res)) return(NULL)
+
+    res <- jsonlite::fromJSON(res, flatten = TRUE, simplifyVector = TRUE)
+    nodes <- res$data$drugs$nodes
+
+    if (is.null(nodes) || length(nodes) == 0 ||
+        (is.data.frame(nodes) && nrow(nodes) == 0)) {
+      message(sprintf("Drug:%s not found in the database!", drug))
+      return(NULL)
     }
-}',drug))
-    ## Execute the query
-    res <- conn$exec(query_drug$queries$x)
-    # Convert the the output from raw to json format
-    res <- jsonlite::fromJSON(res,flatten = TRUE,simplifyVector = TRUE)
-    if(is.null(dim(res$data$drugs$nodes))){
-      message(sprintf("Drug:%s not found in the database!",drug))}else{
-         res_up<-res$data$drugs$nodes
-        return(res_up)}
-        })
-result<-do.call("rbind",out_lst[!is.null(out_lst)])
-return(result)
+    nodes
+  })
+
+  out_lst <- Filter(Negate(is.null), out_lst)
+  if (length(out_lst) == 0) return(NULL)
+  dplyr::bind_rows(out_lst)   # handles list-columns + mismatched columns
 }
 #######seed partner selection with drug database###########
 #' @title Drugbank_drugphase_levels
